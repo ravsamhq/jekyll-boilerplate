@@ -25,6 +25,7 @@
     "license": "ISC",
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.1",
+        "aos": "^2.3.4",
         "bootstrap": "^4.5.3",
         "jquery": "^3.5.1",
         "lazysizes": "^5.2.2"
