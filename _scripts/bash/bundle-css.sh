@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # path to production css directory
 prod_css_dir='assets/prod-css'

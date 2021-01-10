@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # structurize fontawesome icons
 icons_dir="node_modules/@fortawesome/fontawesome-free/svgs/"

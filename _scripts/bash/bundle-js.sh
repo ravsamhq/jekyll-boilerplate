@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # list of js files required by every page
 required_by_all_js_files=("node_modules/jquery/dist/jquery.js"
