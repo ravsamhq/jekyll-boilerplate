@@ -22,9 +22,10 @@ The website is built in Jekyll. For information regarding Jekyll, visit https://
 ## Getting Started
 
 1. Clone the Repo
-2. In terminal, do `npm run setup`
-3. In terminal, do `npm run serve`
-4. In your IDE, use project wide search and search for `#todo` string.
+2. In terminal, do `bundle install`
+3. In terminal, do `npm run setup`
+4. In terminal, do `npm run serve`
+5. In your IDE, use project wide search and search for `#todo` string.
 
 ## Build
 

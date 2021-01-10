@@ -1,7 +1,7 @@
 {
-    "name": "soni-diagnostics-web",
+    "name": "jekyll-boilerplate",
     "version": "1.0.0",
-    "description": "This is a NPM package manager file for soni-diagnostics-web",
+    "description": "This is a NPM package manager file for jekyll-boilerplate",
     "scripts": {
         "setup": "chmod +x _scripts/bash/setup.sh && _scripts/bash/setup.sh",
         "structurize-icons": "chmod +x _scripts/bash/structurize-icons.sh && _scripts/bash/structurize-icons.sh",
@@ -14,12 +14,12 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/ravsamhq/soni-diagnostics-web"
+        "url": "git+https://github.com/ravsamhq/jekyll-boilerplate"
     },
     "bugs": {
-        "url": "https://github.com/ravsamhq/soni-diagnostics-web/issues"
+        "url": "https://github.com/ravsamhq/jekyll-boilerplate/issues"
     },
-    "homepage": "https://github.com/ravsamhq/soni-diagnostics-web",
+    "homepage": "https://github.com/ravsamhq/jekyll-boilerplate",
     "keywords": [],
     "author": "Ravgeet Dhillon",
     "license": "ISC",
