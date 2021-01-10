@@ -1,0 +1,77 @@
+---
+permalink: /sitemap/
+
+index: noindex
+
+meta:
+  title: Sitemap for Humans - {{ site.author }}
+  description: Explore the depth of our website by digging in the unknown world.
+
+landing:
+  heading: Website Sitemap
+---
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    {% include structure/meta.html %}
+    {% include structure/styles.html %}
+</head>
+
+<body class="d-flex flex-column justify-content-between">
+
+    <div class="top-wrapper">    
+        {% include structure/navbar.html %}
+    
+        <section class="py-5">
+            <div class="container">
+                <div class="row mb-4" data-aos="fade">
+                    <div class="col-12">
+                        <h1 class="display-4 font-weight-normal">{{ page.landing.heading }}</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-4 mb-md-0">
+                        <div class="mb-4">
+                            <h2 class="mb-3_5">Pages</h2>
+                            {% assign main_pages = site.pages | where_exp: "item", 'item.index == noindex' | sort: title %}
+                            <div class="d-flex flex-column">
+                                {% for page in main_pages %}
+                                    <a href="{{ page.url | absolute_url }}" class="mb-2">{{ page.title }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div>
+                            <h2 class="mb-3_5">Blogs</h2>
+                            {% assign blogs = site.blogs | sort: meta.title %}
+                            <div class="d-flex flex-column">
+                                {% for page in blogs %}
+                                    <a href="{{ page.url | absolute_url }}" class="mb-2">{{ page.title }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div>
+                            <h2 class="mb-3_5">Legal</h2>
+                            <div class="d-flex flex-column">
+                                {% for page in site.legals %}
+                                    <a href="{{ page.url | absolute_url }}" class="mb-2">{{ page.title }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="footer-wrapper">
+        {% include structure/footer.html %}
+    </div>
+
+{% include structure/scripts.html %}
+
+</body>
+</html>

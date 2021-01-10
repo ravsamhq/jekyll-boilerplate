@@ -1,0 +1,23 @@
+navbar_links:
+  - title: About Us
+    url: /about-us/
+  - title: Services
+    url: /services/
+  - title: Portfolio
+    url: /portfolio/
+  - title: Blog
+    url: /blog/
+  - title: Contact Us
+    url: /contact-us/
+
+footer_links:
+  - title: Sitemap
+    url: /sitemap/
+  - title: Atom Feed
+    url: /blog/feed.xml
+  - title: JSON Feed
+    url: /blog/feed.json
+  - title: Privacy Policy
+    url: /privacy-policy/
+  - title: Terms &amp; Conditions
+    url: /terms-and-conditions/

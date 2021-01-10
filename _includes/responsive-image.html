@@ -1,0 +1,21 @@
+{% capture srcset %}
+    {% for i in resized %}
+        {{ site.url }}/{{ i.path }} {{ i.width }}w,
+    {% endfor %}
+{% endcapture %}
+
+{% assign smallest = resized | sort: 'width' | first %}
+{% assign smallest_path = smallest.path | prepend: '/' | prepend: site.url %}
+
+{% if figclass %}
+    {% assign figclass = figclass %}
+{% else %}
+    {% assign figclass = 'mb-0' %}
+{% endif %}
+
+<figure class="{{ figclass }}">
+    <img width="{{ width }}" src="{{ smallest_path }}" class="{{ class }} blur-up lazyautosizes lazyload" sizes="auto" alt="{{ alt }}" style="{{ style }}" data-srcset="{{ srcset | strip_newlines }}">
+    {% if figcaption %}
+        <figcaption class="text-center text-muted mt-2">{{ figcaption }}</figcaption>
+    {% endif %}
+</figure>

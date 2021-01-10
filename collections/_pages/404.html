@@ -1,0 +1,42 @@
+---
+permalink: /404.html
+
+index: noindex
+
+notfound:
+  heading: 404 - Page Not Found
+  description: Sorry, the page you are looking for might have been removed or is temporarily unavailable.
+---
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    {% include structure/meta.html %}
+    {% include structure/styles.html %}
+</head>
+
+<body class="d-flex flex-column justify-content-between">
+    
+    <div class="top-wrapper">
+    
+        {% include structure/navbar.html %}
+        
+        <section class="py-6" data-aos="fade">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-7 text-center">
+                        <img src="{{ '/assets/images/backs/404-not-found.svg' }}" class="img-fluid w-40 mb-5" alt="Page not found">
+                        <h2 class="mb-3 font-weight-bold">{{ page.notfound.heading }}</h2>
+                        <p class="lead text-dark-light">{{ page.notfound.description }}</p>
+                        <a class="btn btn-secondary rounded-pill px-3_5" href="{{ site.url | append: '/' | absolute_url }}">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+{% include structure/scripts.html %}
+
+</body>
+</html>

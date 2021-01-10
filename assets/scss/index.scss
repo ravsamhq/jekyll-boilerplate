@@ -1,0 +1,261 @@
+// font system
+@import './fonts';
+
+// color system
+@import './colors';
+
+// spacing system
+$spacer: 1rem;
+$spacers: (
+    0: 0,
+    1: (
+        $spacer * 0.25,
+    ),
+    2: (
+        $spacer * 0.5,
+    ),
+    3: $spacer,
+    3_5: $spacer * 1.5,
+    4: (
+        $spacer * 2,
+    ),
+    5: (
+        $spacer * 4,
+    ),
+    6: (
+        $spacer * 6,
+    ),
+    7: (
+        $spacer * 8,
+    ),
+);
+
+$body-bg: map-get($theme-colors, 'white');
+$body-color: map-get($theme-colors, 'dark');
+$link-color: map-get($theme-colors, 'secondary');
+$link-hover-decoration: underline;
+$enable-responsive-font-sizes: true;
+$alert-border-width: 0.25rem;
+
+$font-family-sans-serif: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !important;
+
+// disable the default bootstrap box shadow when the elements they are clicked
+$pagination-focus-box-shadow: none !important;
+$input-btn-focus-box-shadow: none !important;
+$btn-focus-box-shadow: none !important;
+$input-focus-box-shadow: none !important;
+
+// define shadows
+$box-shadow-sm: 0 0.125rem 0.25rem rgba(map-get($theme-colors, 'secondary-dark'), 0.075) !default;
+$box-shadow: 0 0.5rem 1rem rgba(map-get($theme-colors, 'secondary-dark'), 0.15) !default;
+$box-shadow-lg: 0 1rem 3rem rgba(map-get($theme-colors, 'secondary-dark'), 0.175) !default;
+
+a {
+    transition: 0.15s ease-in-out !important;
+}
+
+$grid-breakpoints: (
+    xs: 0px,
+    ms: 484px,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+);
+
+$widths: 20, 25, 40, 50, 60, 75, 80, 100, auto;
+$heights: 20, 25, 40, 50, 60, 75, 80, 100, auto;
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+    @media (min-width: map-get($grid-breakpoints, $breakpoint)) {
+        @each $i in $widths {
+            $breakpointValue: '';
+            @if $breakpoint == 'xs' {
+                $breakpointValue: $i;
+            } @else {
+                $breakpointValue: $breakpoint + '-' + $i;
+            }
+            .w-#{$breakpointValue} {
+                @if type-of($i) == 'number' {
+                    width: unquote($i + '%' + ' !important');
+                } @else {
+                    width: #{$i} !important;
+                }
+            }
+        }
+        @each $i in $heights {
+            $breakpointValue: '';
+            @if $breakpoint == 'xs' {
+                $breakpointValue: $i;
+            } @else {
+                $breakpointValue: $breakpoint + '-' + $i;
+            }
+            .h-#{$breakpointValue} {
+                @if type-of($i) == 'number' {
+                    height: unquote($i + '%' + ' !important');
+                } @else {
+                    height: #{$i} !important;
+                }
+            }
+        }
+    }
+}
+
+@import '../../node_modules/bootstrap/scss/functions';
+@import '../../node_modules/bootstrap/scss/variables';
+@import '../../node_modules/bootstrap/scss/mixins';
+@import '../../node_modules/bootstrap/scss/root';
+@import '../../node_modules/bootstrap/scss/reboot';
+@import '../../node_modules/bootstrap/scss/type';
+@import '../../node_modules/bootstrap/scss/images';
+@import '../../node_modules/bootstrap/scss/code';
+@import '../../node_modules/bootstrap/scss/grid';
+@import '../../node_modules/bootstrap/scss/tables';
+@import '../../node_modules/bootstrap/scss/forms';
+@import '../../node_modules/bootstrap/scss/buttons';
+@import '../../node_modules/bootstrap/scss/transitions';
+@import '../../node_modules/bootstrap/scss/dropdown';
+@import '../../node_modules/bootstrap/scss/button-group';
+@import '../../node_modules/bootstrap/scss/input-group';
+@import '../../node_modules/bootstrap/scss/custom-forms';
+@import '../../node_modules/bootstrap/scss/nav';
+@import '../../node_modules/bootstrap/scss/navbar';
+@import '../../node_modules/bootstrap/scss/card';
+@import '../../node_modules/bootstrap/scss/breadcrumb';
+@import '../../node_modules/bootstrap/scss/pagination';
+@import '../../node_modules/bootstrap/scss/badge';
+@import '../../node_modules/bootstrap/scss/jumbotron';
+@import '../../node_modules/bootstrap/scss/alert';
+@import '../../node_modules/bootstrap/scss/progress';
+@import '../../node_modules/bootstrap/scss/media';
+@import '../../node_modules/bootstrap/scss/list-group';
+@import '../../node_modules/bootstrap/scss/close';
+@import '../../node_modules/bootstrap/scss/toasts';
+@import '../../node_modules/bootstrap/scss/modal';
+@import '../../node_modules/bootstrap/scss/tooltip';
+@import '../../node_modules/bootstrap/scss/popover';
+@import '../../node_modules/bootstrap/scss/carousel';
+@import '../../node_modules/bootstrap/scss/spinners';
+@import '../../node_modules/bootstrap/scss/utilities';
+@import '../../node_modules/bootstrap/scss/print';
+
+html,
+body {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    min-height: 100%;
+    font-display: swap;
+}
+
+// related to text
+.text-shadow {
+    text-shadow: 0 0.125rem 0.25rem rgba(map-get($theme-colors, 'dark'), 0.15) !important;
+}
+.p-in-span p {
+    margin-bottom: 1rem;
+}
+b,
+strong {
+    font-weight: bold !important;
+}
+textarea {
+    min-height: 64px;
+}
+.lead {
+    font-weight: normal;
+}
+.custom-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.icon-fw {
+    text-align: center;
+    width: 1.25em;
+}
+figcaption {
+    font-size: 1rem;
+}
+
+// layout and spacing
+.btn-go-to-top {
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+.limit-width {
+    max-width: 1400px;
+}
+.nav-link {
+    padding-left: 0rem !important;
+    padding-right: 0rem !important;
+    padding-bottom: 0.25rem !important;
+    border-bottom: 0.125rem solid transparent;
+}
+.nav-link:hover {
+    border-bottom: 0.125rem solid;
+}
+.wide-space {
+    letter-spacing: 0.1rem;
+    font-size: 0.9rem;
+}
+.navbar-nav .dropdown-menu {
+    position: absolute;
+    min-width: 100%;
+}
+.dropdown-divider {
+    border-top: 0.25rem solid lighten(map-get($theme-colors, 'primary'), 4%);
+}
+.dropdown-item:hover,
+.dropdown-item:active {
+    background: darken(map-get($theme-colors, 'primary'), 24%);
+}
+
+$placementPositions: 'top', 'right', 'bottom', 'left';
+@each $position in $placementPositions {
+    .#{$position}-0 {
+        #{$position}: 0;
+    }
+}
+
+.bg-center {
+    background-position: center !important;
+}
+.bg-norepeat {
+    background-repeat: no-repeat !important;
+}
+
+// shadow hover
+$sizes: (
+    'sm': $box-shadow,
+    'md': $box-shadow-lg,
+    'lg': $box-shadow-sm,
+);
+@each $size, $value in $sizes {
+    .shadow-hover-#{$size} {
+        transition: 0.12s ease-in-out;
+        &:hover {
+            box-shadow: $value !important;
+        }
+    }
+}
+
+// lazyload
+.no-js img.lazyload {
+    display: none;
+}
+.blur-up {
+    filter: blur(0.25rem);
+    transition: filter 400ms;
+    &.lazyloaded {
+        filter: blur(0);
+    }
+}
+.fade-in {
+    opacity: 0;
+    transition: opacity 400ms;
+    &.lazyloaded {
+        opacity: 1;
+    }
+}

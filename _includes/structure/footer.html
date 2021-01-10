@@ -1,0 +1,67 @@
+<footer class="bg-theme-white py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-5 pr-6">
+                <a href="{{ site.url | append: '/' | absolute_url }}" rel="nofollow noreferrer" class="navbar-brand d-flex align-items-baseline mb-3">
+                    <!-- icon -->
+                </a>
+                <span class="text-muted p-in-span">{{ site.about_footer | markdownify }}</span>
+                <div class="mb-4">
+                    {% assign social_icons = site.social | where_exp: 'item', 'item.url != nil' %}
+                    {% for social in social_icons %}
+                        <a href="{{ social.url }}" class="text-decoration-none brand-{{ social_link.name }} mr-3" title="{{ social_link.name | capitalize }} of {{ site.author }}" aria-label="{{ social_link.name | capitalize }} of {{ site.author }}">
+                            {% assign icon_path = 'icons/fontawesome/brands/' | append: social.icon | append: '.svg' %}
+                            {% include {{ icon_path }} height='1.2rem' fill=social.color %}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="row">
+                    <div class="col-ms-5 mb-4 px-3">
+                        <div class="d-flex flex-column">
+                            <p class="wide-space text-primary">{{ 'Company' | upcase }}</p>
+                            {% for nav_link in site.data.navigation.navbar_links %}
+                                <a href="{{ nav_link.url | absolute_url }}" class="text-muted mr-3 mb-2">{{ nav_link.title }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-ms-7 mb-4 px-3">
+                        <div class="d-flex flex-column">
+                            <p class="wide-space text-primary">{{ 'Services' | upcase }}</p>
+                            {% for service in site.services %}
+                                <a href="{{ service.url | absolute_url }}" class="text-muted mr-3 mb-2">{{ service.title }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-ms-5 mb-4 px-3">
+                        <div class="d-flex flex-column">
+                            <p class="wide-space text-primary">{{ 'Contact No.' | upcase }}</p>
+                            <a class="text-muted mb-2" href="tel:{{ site.contacts.office1 }}">{{ site.contacts.office1 }}</a>
+                            <a class="text-muted mb-3" href="tel:{{ site.contacts.office2 }}">{{ site.contacts.office2 }}</a>
+                        </div>
+                    </div>
+                    <div class="col-ms-7 mb-4 px-3">
+                        <div class="d-flex flex-column">
+                            <p class="wide-space text-primary">{{ 'Email' | upcase }}</p>
+                            <a class="text-muted mb-3" href="mailto:{{ site.contacts.email }}?subject=Request%20for%20a%20Service">{{ site.contacts.email }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 small d-flex justify-content-between flex-wrap">
+                    {% assign date = site.time | date_to_string | split: ' ' %}
+                    {% assign year = date[2] %}    
+                    <span class="text-muted">&copy; {{ year }} - {{ site.developer.full_name }} | All rights reserved</span>
+                    <div>
+                        {% for nav_link in site.data.navigation.footer_links %}
+                            <a href="{{ nav_link.url | absolute_url }}" class="text-muted mr-3 mb-2">{{ nav_link.title }}</a>
+                        {% endfor %}
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,15 @@
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+node_modules/
+_site/
+public/
+
+assets/prod-css/
+assets/prod-js/
+
+_includes/css/
+_includes/js/
+_includes/icons/
+_data/generated/

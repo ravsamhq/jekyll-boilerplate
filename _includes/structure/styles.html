@@ -1,0 +1,12 @@
+<style>
+    {% if include.markdown == "true" %}
+        {% include css/markdown.css %}
+        {% include css/highlight.css %}
+    {% endif %}
+
+    {% include css/aos.css %}
+</style>
+
+{% for stylesheet in site.data.generated.hashes.css %}
+    <link href="{{ stylesheet | absolute_url }}" rel="stylesheet" media="screen" type="text/css" />
+{% endfor %}

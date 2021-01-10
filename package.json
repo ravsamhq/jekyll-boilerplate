@@ -1,0 +1,37 @@
+{
+    "name": "soni-diagnostics-web",
+    "version": "1.0.0",
+    "description": "This is a NPM package manager file for soni-diagnostics-web",
+    "scripts": {
+        "setup": "chmod +x _scripts/bash/setup.sh && _scripts/bash/setup.sh",
+        "structurize-icons": "chmod +x _scripts/bash/structurize-icons.sh && _scripts/bash/structurize-icons.sh",
+        "watch-css": "node-sass -w assets/scss/ -o assets/css/ --output-style compressed",
+        "compile-css": "chmod +x _scripts/bash/bundle-css.sh && _scripts/bash/bundle-css.sh",
+        "compile-js": "chmod +x _scripts/bash/bundle-js.sh && _scripts/bash/bundle-js.sh",
+        "minify-html": "chmod +x _scripts/bash/minify-html.sh && _scripts/bash/minify-html.sh",
+        "serve": "bundle exec jekyll serve",
+        "build": "chmod +x _scripts/bash/build.sh && _scripts/bash/build.sh"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ravsamhq/soni-diagnostics-web"
+    },
+    "bugs": {
+        "url": "https://github.com/ravsamhq/soni-diagnostics-web/issues"
+    },
+    "homepage": "https://github.com/ravsamhq/soni-diagnostics-web",
+    "keywords": [],
+    "author": "Ravgeet Dhillon",
+    "license": "ISC",
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.15.1",
+        "bootstrap": "^4.5.3",
+        "jquery": "^3.5.1",
+        "lazysizes": "^5.2.2"
+    },
+    "devDependencies": {
+        "html-minifier": "^4.0.0",
+        "node-sass": "^5.0.0",
+        "terser": "^5.5.1"
+    }
+}

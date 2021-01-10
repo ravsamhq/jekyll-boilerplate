@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    {% include structure/meta.html %}
+    {% include structure/styles.html %}
+</head>
+
+<body class="d-flex flex-column justify-content-between">
+
+    <div class="top-wrapper">
+        {% include structure/navbar.html %}
+        
+        <section class="py-5" data-aos="fade">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-md-10">
+                        <h1 class="display-4 mb-4 font-weight-bold">{{ page.title }}</h1>
+                        <article class="markdown-body">{{ page.content | markdownify | extlinks }}</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% include lead-contact-form.html %}
+        
+    </div>
+
+    <div class="footer-wrapper">
+        {% include structure/footer.html %}
+    </div>
+
+{% include structure/scripts.html %}
+
+</body>
+</html>

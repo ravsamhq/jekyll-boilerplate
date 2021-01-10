@@ -1,0 +1,20 @@
+{% assign blog = include.blog %}
+<div class="col-sm-6 mb-sm-0 mb-4" data-aos="fade-up">
+    <div class="w-100 mb-3">
+        {% responsive_image_block %}
+            path: {{ blog.image.path }}
+            alt: {{ blog.image.alt }}
+            class: 'img-fluid rounded-lg'
+            width: '100%'
+        {% endresponsive_image_block %}
+    </div>
+    <div class="w-100">
+        <div class="mb-2">
+            <span class="text-muted">on <span class="text-dark-light">{{ blog.date | date: "%b %d, %Y" }}</span></span>
+        </div>
+        <a href="{{ blog.url | absolute_url }}" class="text-primary-dark stretched-link">
+            <h4 class="mb-3">{{ blog.title }}</h4>
+            <span class="text-primary"><small>Read -&gt;</small></span>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+---
+permalink: /blog/feed.json
+---
+
+{%- assign pick_related_blogs = 2 -%}
+
+{
+    "version": "https://jsonfeed.org/version/1.1",
+    "title": {{ 'JSON Feed for ' | append: site.author | xml_escape | jsonify}},
+    "description": {{ site.description | jsonify }},
+    "favicon": {{ '/assets/images/logos/favicons/apple-touch-icon.png' | absolute_url | jsonify}},
+    "language": "en",
+    "home_page_url": {{ '/' | absolute_url | jsonify }},
+    "feed_url": {{ page.permalink | absolute_url | jsonify }},
+    "user_comment": "This feed allows you to read the blogs from this site in any feed reader that supports the JSON Feed format.",
+    "items": [{%- for blog in site.blogs reversed -%}
+        {
+            "id": {{ blog.url | absolute_url | jsonify}},
+            "url": {{ blog.url | absolute_url | jsonify}},
+            "language": "en",
+            "title": {{ blog.title | jsonify }},
+            "summary": {{ blog.description | jsonify }},
+            "content_html": {{ blog.content | jsonify | replace: '/assets/images/resized/20/', '/assets/images/blog-assets/' }},
+            "date_published": {{ blog.date | date_to_xmlschema | jsonify }},
+            "date_modified": {{ blog.last_modified_at | date_to_xmlschema | jsonify }},
+            "image": {{ blog.image.path | absolute_url | jsonify }},
+            "banner_image": {{ blog.image.path | absolute_url | jsonify }},
+            "authors": [{{ blog.author | jsonify }}],
+            "categories": {{ blog.categories | jsonify }},
+            "tags": {{ blog.tags | jsonify }},
+            "contact_snippet": {{ blog.contact | jsonify }},
+
+            {%- assign related_blogs = '' | split: ',' -%}
+            
+            {%- for tag in blog.tags -%}
+                {%- assign related_blogs_on_tag = site.blogs | where_exp: 'item', 'item.tags contains tag and item.url != blog.url' | map: 'url' -%}
+                {%- assign related_blogs = related_blogs | concat: related_blogs_on_tag -%}
+            {%- endfor -%}
+
+            {%- assign related_blogs = related_blogs | group_by: tag | sort: 'size' | reverse | map: 'name' -%}
+            {%- assign random_blogs = site.blogs | sample: pick_related_blogs | map: 'url' -%}
+            {%- assign related_blogs = related_blogs | concat: random_blogs | uniq | compact | slice: 0, pick_related_blogs -%}
+            
+            {%- assign related_blogs_url = '' | split: ',' -%}
+            {%- for url in related_blogs -%}
+                {%- assign abs_url = url | absolute_url -%}
+                {%- assign related_blogs_url = related_blogs_url | push: abs_url -%}
+            {%- endfor -%}
+
+            "related_blogs": {{ related_blogs_url | jsonify }}
+        }
+
+        {%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}
+    ]
+}

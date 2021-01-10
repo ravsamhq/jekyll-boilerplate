@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg container py-2 bg-transparent" style="z-index: 10;" id="navbar" role="navigation">
+    <a href="{{ site.url | append: '/' | absolute_url }}" class="navbar-brand text-dark d-flex align-items-baseline">
+        <!-- icon -->
+    </a>
+    <button class="navbar-toggler p-0" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-label="Open Menu">
+        {% include icons/fontawesome/solid/bars.svg height='1.5rem' fill=site.colors.dark %}
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            {% for nav_link in site.data.navigation.navbar_links %}
+                {% assign link_style = "text-dark" %}
+                <li class="nav-item nav-item-{{ nav_link.title | replace: ' ', '-' | downcase }} pl-lg-4 py-2 py-lg-0 text-right text-lg-left">
+                    {% if nav_link.title == 'Contact Us' %}
+                        <a href="{{ nav_link.url | absolute_url }}" class="btn btn-outline-primary rounded-pill px-3_5">{{ nav_link.title }}</a>
+                    {% else %}
+                        <a href="{{ nav_link.url | absolute_url }}" class="nav-link text-dark">{{ nav_link.title }}</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>  
+</nav>

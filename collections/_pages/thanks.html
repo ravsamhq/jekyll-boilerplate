@@ -1,0 +1,45 @@
+---
+permalink: /thanks/
+
+index: noindex
+
+thanks:
+  heading: Thanks for reaching us
+  description: Thanks for choosing {{ site.author }}. We have been notified of your request. Our team will get back to you as soon as possible.
+---
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    {% include structure/meta.html %}
+    {% include structure/styles.html %}
+</head>
+
+<body class="d-flex flex-column justify-content-between">
+    
+    <div class="top-wrapper">    
+        {% include structure/navbar.html %}
+        
+        <section class="py-6" data-aos="fade">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-7">
+                        <h2 class="display-3 mb-0 ml-3" style="transform: rotate(90deg);width: fit-content;">:)</h2>
+                        <h2 class="mb-4">{{ page.thanks.heading }}</h2>
+                        <span class="lead text-dark-light p-span">{{ page.thanks.description | markdownify }}</span>
+                        <p class="lead text-dark-light">Continue Browsing on <a class="text-secondary text-decoration-none" href="{{ site.url }}">{{ site.author }} -&gt;<i class="fas fa-long-arrow-alt-right ml-2"></i></a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="footer-wrapper">
+        {% include structure/footer.html %}
+    </div>
+
+{% include structure/scripts.html %}
+
+</body>
+</html>

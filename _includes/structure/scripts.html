@@ -1,0 +1,7 @@
+{% for script in site.data.generated.hashes.js %}
+    <script src="{{ script | absolute_url }}"></script>
+{% endfor %}
+
+<script defer>
+    {% include js/index.js %}
+</script>

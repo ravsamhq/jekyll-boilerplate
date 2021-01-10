@@ -1,0 +1,180 @@
+title: #todo
+
+description: #todo
+
+author: #todo
+
+google:
+  analytics_code: #todo
+  site_verification: #todo
+
+contacts:
+  office1: #todo
+  email: #todo
+
+timings:
+  weekdays:
+    opens: '09:00'
+    closes: '21:00'
+  weekends:
+    opens: '09:00'
+    closes: '18:00'
+
+about_footer: #todo
+
+maps:
+  iframe: https://www.google.com/maps/embed?pb=
+  directions: https://maps.google.com/maps?ll=
+
+developer:
+  brand: RavSam
+  full_name: RavSam Web Solutions
+  website: https://www.ravsam.in
+
+baseurl: ''
+
+url: #todo
+
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+
+plugins:
+  - jekyll-feed
+  - jekyll-responsive-image
+  - jekyll-last-modified-at
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - package-lock.json
+  - package.json
+  - node_modules/
+  - README.md
+  - '*.sh'
+
+collections_dir: collections
+
+collections:
+  pages:
+    output: true
+  services:
+    output: true
+  blogs:
+    output: true
+  assets:
+    output: true
+  misc:
+    output: true
+  legals:
+    output: true
+
+defaults:
+  - scope:
+      type: blogs
+    values:
+      layout: blog
+      type: article
+      permalink: blog/:name/
+  - scope:
+      type: services
+    values:
+      layout: service
+      type: service
+      permalink: services/:name/
+  - scope:
+      type: legals
+    values:
+      layout: legal
+      index: noindex
+      permalink: :name/
+  - scope:
+      type: misc
+    values:
+      index: noindex
+
+feed:
+  posts_limit: 100
+  collections:
+    blogs:
+      path: /blog/feed.xml
+
+responsive_image:
+  template: _includes/responsive-image.html
+  default_quality: 90
+  sizes:
+    - width: 20
+      quality: 1
+    - width: 64
+      quality: 90
+    - width: 300
+      quality: 95
+    - width: 484
+      quality: 95
+    - width: 576
+      quality: 95
+    - width: 720
+      quality: 95
+    - width: 960
+      quality: 100
+    - width: 1140
+      quality: 100
+    - width: 1400
+      quality: 100
+
+  base_path: assets/images/*
+  output_path_format: assets/images/resized/%{width}/%{basename}
+  strip: true
+  save_to_source: false
+  cache: true
+
+colors:
+  primary: '#123372'
+  primary-light: '#d0e0ff'
+  primary-dark: '#000e28'
+  secondary: '#dd4651'
+  secondary-light: '#f9ced1'
+  secondary-dark: '#2d0205'
+  success: '#29c44d'
+  info: '#1485ba'
+  warning: '#fca728'
+  danger: '#ef3437'
+  white: '#ffffff'
+  theme-white: '#f5f5f5'
+  theme-white-light: '#ebebeb'
+  light: '#cccccc'
+  dark: '#141414'
+  dark-light: '#292929'
+
+social:
+  - icon: facebook
+    color: '#3b5998'
+    url: #todo
+  - icon: twitter
+    color: '#1da1f2'
+    url: #todo
+  - icon: instagram
+    color: '#c13584'
+    url: #todo
+  - icon: linkedin
+    color: '#0077b5'
+    url: #todo
+  - icon: dribbble
+    color: '#ea4c89'
+    url: #todo
+  - icon: github
+    color: '#333333'
+    url: #todo
+  - icon: reddit
+    color: '#ff4500'
+    url: #todo
+  - icon: buffer
+    color: '#59626a'
+    url: #todo
+  - icon: whatsapp
+    color: '#25d366'
+    url: #todo
+  - icon: google
+    color: '#fbbc05'
+    url: #todo

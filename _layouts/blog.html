@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    {% include structure/meta.html %}
+    {% include schemas/blog-schema.html %}
+    {% include structure/styles.html %}
+</head>
+
+<body class="d-flex flex-column justify-content-between">
+
+    <div class="top-wrapper">
+        {% include structure/navbar.html %}        
+
+        <div data-aos-duration="300" data-aos-easing="ease-in-out-back" class="d-none d-md-none align-items-center position-fixed right-0 h-100 pr-4" style="z-index: 100000;" id="social-bar">
+            {% include social/buttons-vertical.html %}
+        </div>
+
+        {% include structure/navbar.html %}
+
+        <section class="pt-lg-6 pt-5 pb-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 mb-4" data-aos="fade">
+                        <p class="mb-4"><a href="{{ '/blog/' | absolute_url }}">&lt;- to Blogs</a></p>
+                        <h1 class="font-weight-bold display-4 mb-4">{{ page.title }}</h1>
+                        <div class="d-md-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center mb-md-0 mb-4">
+                                <div>
+                                    {% responsive_image_block %}
+                                        path: {{ 'assets/images/team/' | append: page.author.avatar }}
+                                        alt: {{ page.author.name }}
+                                        class: 'img-fluid rounded-circle'
+                                        style: 'max-width: 4rem;'
+                                        width: 64
+                                    {% endresponsive_image_block %}
+                                </div>
+                                <div class="d-flex flex-column ml-3">
+                                    <span class="text-primary">{{ page.author.name }}</a></span>
+                                    <span class="text-muted">on <span class="text-dark-light">{{ page.date | date: "%b %d, %Y" }}</span><span class="mx-2">&bull;</span><span class="text-dark-light">{{ page.content | number_of_words | divided_by: 180 | plus: 1 }} min</span> read</span></span>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column">
+                                <span class="text-muted">Written in</a></span>
+                                <div class="d-flex">
+                                    {% for category in page.categories %}
+                                        {% assign words = category | split: '-' %}
+                                        {% capture category_titlecase %}{% for word in words %}{{ word | capitalize }} {% endfor %}{% endcapture %}
+                                        <a href="{{ '/categories/' | append: category | append: '/' | absolute_url }}">{{ category_titlecase }}</a>
+                                        {% unless forloop.last %}
+                                            <span class="text-muted mx-2">&bull;</span>
+                                        {% endunless %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-10 mb-5" data-aos="fade">
+                        {% responsive_image_block %}
+                            path: {{ page.image.path }}
+                            alt: {{ 'Blog banner for ' | append: page.title }}
+                            class: 'img-fluid rounded-lg shadow'
+                            width: '100%'
+                        {% endresponsive_image_block %}
+                    </div>
+                    <div class="col-lg-8 mb-sm-3">
+                        <article class="mb-5 markdown-body" data-aos="fade">
+                            {{ page.content | markdownify | extlinks }}
+                        </article>
+
+
+                        <section class="mb-5" data-aos="fade">
+                            <h3 class="wide-space font-weight-normal mb-3 text-muted">{{ 'Tagged In' | upcase }}</h3>
+                            <div class="mb-4">
+                                {% for tag in page.tags %}
+                                    {% assign words = tag | split: '-' %}
+                                    {% capture tag_titlecase %}{% for word in words %}{{ word | capitalize }} {% endfor %}{% endcapture %}
+                                    <a href="{{ '/tags/' | append: tag | append: '/' | absolute_url }}">{{ tag_titlecase }}</a>
+                                    {% unless forloop.last %}
+                                        <span class="text-muted mx-1">&bull;</span>
+                                    {% endunless %}
+                                {% endfor %}
+                            </div>
+                            <div class="d-md-none">
+                                <h3 class="wide-space font-weight-normal mb-3 text-muted">{{ 'Share' | upcase }}</h3>
+                                {% include social/buttons-horizontal.html %}
+                            </div>
+                        </section>
+
+
+                        <section class="mb-5">
+                            {% include blog-subscription-form.html %}
+                        </section>
+
+
+                        <section class="mb-5">
+                            <h3 class="wide-space font-weight-normal mb-3_5 text-muted">
+                                <a class="text-muted" href="{{ '/blog/' | absolute_url }}">{{ 'People also read' | upcase }}</a>
+                            </h3>
+                            <div class="row">
+                                {% assign related_posts_count = 0 %}
+                                {% assign blogs_added = '' | split: ',' | push: page.url %}
+                                {% assign primary_category = page.categories | first %}
+
+                                {% for blog in site.blogs reversed %}
+                                    {% if blog.categories contains primary_category and related_posts_count < 2 %}
+                                        {% unless blogs_added contains blog.url %}
+                                            {% include blog-preview.html blog=blog %}
+                                            {% assign blogs_added = blogs_added | push: blog.url %}
+                                            {% assign related_posts_count = related_posts_count | plus: 1 %}
+                                        {% endunless %}
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if related_posts_count < 2 %}
+                                    {% assign blog = site.blogs | last %}
+                                    {% unless blogs_added contains blog.url %}
+                                        {% include blog-preview.html blog=blog %}
+                                        {% assign blogs_added = blogs_added | push: blog.url %}
+                                        {% assign related_posts_count = related_posts_count | plus: 1 %}
+                                    {% endunless %}
+                                {% endif %}
+
+                                {% if related_posts_count < 2 %}
+                                    {% assign blog = site.blogs | first %}
+                                    {% unless blogs_added contains blog.url %}
+                                        {% include blog-preview.html blog=blog %}
+                                        {% assign blogs_added = blogs_added | push: blog.url %}
+                                        {% assign related_posts_count = related_posts_count | plus: 1 %}
+                                    {% endunless %}
+                                {% endif %}
+
+                                {% if related_posts_count < 2 and page.previous %}
+                                    {% assign blog = page.previous %}
+                                    {% unless blogs_added contains blog.url %}
+                                        {% include blog-preview.html blog=blog %}
+                                        {% assign blogs_added = blogs_added | push: blog.url %}
+                                        {% assign related_posts_count = related_posts_count | plus: 1 %}
+                                    {% endunless %}
+                                {% endif %}
+
+                                {% if related_posts_count < 2 and page.next %}
+                                    {% assign blog = page.next %}
+                                    {% unless blogs_added contains blog.url %}
+                                        {% include blog-preview.html blog=blog %}
+                                        {% assign blogs_added = blogs_added | push: blog.url %}
+                                        {% assign related_posts_count = related_posts_count | plus: 1 %}
+                                    {% endunless %}
+                                {% endif %}
+                            </div>
+                        </section>
+
+
+                        <section class="mb-5" data-aos="fade">
+                            <h3 class="wide-space font-weight-normal mb-3_5 text-muted">{{ 'Write a Comment' | upcase }}</h3>
+                            <div class="row">
+                                <div class="col-12">
+                                    <form id="comment-form" class="needs-validation" role="form" novalidate>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" name="name" pattern="^[a-zA-Z\s]+$" class="form-control rounded-pill px-3_5" placeholder="Full Name" required>
+                                                    <div class="invalid-feedback">
+                                                        Please add a valid name
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="email" name="email" class="form-control rounded-pill px-3_5" placeholder="Email" required>
+                                                    <div class="invalid-feedback">
+                                                        Please add a valid email
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <textarea class="form-control rounded px-3_5" rows="4" name="comment" placeholder="Write a comment" required></textarea>
+                                                    <div class="invalid-feedback">
+                                                        Please add a valid comment
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="blog" value="{{ page.url }}">
+                                            <input type="hidden" name="method" value="comment">
+                                            <div class="col-12 mt-3 text-right">
+                                                <button class="btn btn-primary rounded-pill px-3_5" type="submit" name="submit">Comment</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div id="comment-message-success" class="alert alert-info d-none">
+                                        <span>Thanks for your comment. Your comment has been sent for approval. Once it is approved, it will be visible here.</span>
+                                    </div>
+                                    <div id="comment-message-error" class="alert alert-danger d-none">
+                                        <span>There was some problem with this comment submission. Please try again after some time or notify the owners at <a href="mailto:{{ site.contacts.email }}">{{ site.contacts.email }}</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+
+                        {% assign comments = site.data.comments.comments | where: 'blog', page.url %}
+                        {% assign total_comments = comments | size | minus:1 %}
+                        {% if total_comments > -1 %}
+                            <section data-aos="fade">
+                                <h3 class="wide-space font-weight-normal mb-3_5 text-muted">{{ 'Comments' | upcase }}</h3>
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% for i in (0..total_comments) %}
+                                            <div class="mb-3_5">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="rounded-circle d-flex justify-content-center align-items-center shadow-sm" style="color: {{ comments[i].textcolor }};background: {{ comments[i].bgcolor }}; height: 2rem; width: 2rem;">
+                                                        <span>{{ comments[i].name | slice:0 | capitalize }}</span>
+                                                    </div>
+                                                    <div class="col">
+                                                        <span class="text-dark-light mb-3"><b>{{ comments[i].name }}</b> <span class="text-muted">&bull;</span> <span class="text-muted small" id="time" data-time="{{ comments[i].timestamp }}"></span></span>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-start">
+                                                    <div style="height: 2rem; width: 2rem;"></div>
+                                                    <div class="col">
+                                                        <p>{{ comments[i].comment | extlinks }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </section>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% include lead-contact-form.html %}
+
+    </div>
+
+    <div class="footer-wrapper">
+        {% include structure/footer.html %}
+    </div>
+
+{% include structure/scripts.html timeago="true" clipboard="true" %}
+
+<script>
+    // for validating and collecting comments
+    (function () {
+        'use strict';
+        window.addEventListener(
+            'load',
+            function () {
+                let commentMessageSuccessBox = $('#comment-message-success')[0];
+                let commentMessageErrorBox = $('#comment-message-error')[0];
+                let commentFormObject = $('#comment-form');
+                let commentForm = commentFormObject[0];
+                if (commentForm !== undefined) {
+                    commentForm.addEventListener(
+                        'submit',
+                        function (event) {
+                            let submitBtn = commentFormObject.closest('form').find(':submit')[0];
+                            submitBtn.disabled = true;
+                            submitBtn.innerHTML = 'Adding comment...';
+
+                            if (commentForm.checkValidity() === false) {
+                                submitBtn.disabled = false;
+                                submitBtn.innerHTML = 'Comment';
+                                event.preventDefault();
+                                event.stopPropagation();
+                            } else {
+                                let url = '{{ site.backend.url }}';
+                                let xhr = $.ajax({
+                                    url: url,
+                                    method: 'POST',
+                                    dataType: 'json',
+                                    data: commentFormObject.serialize(),
+                                    success: function (data) {
+                                        commentForm.classList.add('d-none');
+                                        commentMessageSuccessBox.classList.remove('d-none');
+                                    },
+                                    error: function (data) {
+                                        commentForm.classList.add('d-none');
+                                        commentMessageErrorBox.classList.remove('d-none');
+                                    },
+                                });
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            commentForm.classList.add('was-validated');
+                        },
+                        false
+                    );
+                }
+            },
+            false
+        );
+    })();
+
+    // calculates how much time ago an comment was made using moment.js
+    let times = document.querySelectorAll('#time');
+    times.forEach((item) => {
+        let time = item.getAttribute('data-time');
+        item.innerHTML = timeago.format(time);
+    });
+
+    // copy code buttons
+    let codes = document.querySelectorAll('.highlight > pre > code');
+    let countID = 0;
+    const copyBtnClass = 'btn-primary-light';
+    const copyBtnSuccessClass = 'btn-success';
+    const copyBtnErrorClass = 'btn-danger';
+
+    codes.forEach((code) => {
+
+        code.setAttribute('id', 'code' + countID);
+
+        let btn = document.createElement('button');
+        btn.innerHTML = 'Copy';
+        btn.className = 'btn btn-sm btn-copy position-absolute mt-n1 ' + copyBtnClass;
+        btn.setAttribute('data-clipboard-action', 'copy');
+        btn.setAttribute('data-clipboard-target', '#code' + countID);
+
+        let div = document.createElement('div');
+        div.appendChild(btn);
+
+        code.before(div);
+
+        countID++;
+    });
+
+    // add success and error event
+    let cb = new ClipboardJS('.btn-copy');
+    cb.on('success', function (e) {
+        e.trigger.classList.replace(copyBtnClass, copyBtnSuccessClass);
+        e.trigger.innerText = 'Copied!';
+
+        setTimeout(() => {
+            e.trigger.classList.replace(copyBtnSuccessClass, copyBtnClass);
+            e.trigger.innerText = 'Copy';
+        }, 2000);
+
+        e.clearSelection();
+    });
+
+    cb.on('error', function (e) {
+        e.trigger.classList.replace(copyBtnClass, copyBtnErrorClass);
+        e.trigger.innerText = 'There was an error!';
+
+        setTimeout(() => {
+            e.trigger.classList.replace(copyBtnErrorClass, copyBtnClass);
+            e.trigger.innerText = 'Copy';
+        }, 2000);
+
+        e.clearSelection();
+    });
+
+    // social media buttons behaviour
+    const socialBar = document.getElementById('social-bar');
+    const blogContent = document.getElementsByTagName('article')[0];
+    $(window).scroll(function() {
+        var windowHeight = window.innerHeight;
+        var blogContentTop = blogContent.getBoundingClientRect().top;
+        var blogContentBottom = blogContent.getBoundingClientRect().bottom;
+
+        setTimeout(() => socialBar.setAttribute('data-aos', 'slide-left'), 25);
+        
+        if (blogContentTop <= windowHeight / 1.5 && blogContentBottom >= windowHeight / 1.5) {
+            setTimeout(() => socialBar.classList.replace('d-md-none', 'd-md-flex'), 25);
+            setTimeout(() => socialBar.classList.add('aos-animate'), 50);
+        }
+        else {
+            socialBar.classList.replace('d-md-flex', 'd-md-none');
+            socialBar.classList.remove('aos-animate');            
+        }
+    });
+</script>
+
+</body>
+</html>

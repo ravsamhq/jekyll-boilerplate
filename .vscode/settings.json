@@ -1,0 +1,18 @@
+{
+    "prettier.tabWidth": 4,
+    "prettier.printWidth": 120,
+    "prettier.disableLanguages": [
+        "html",
+        "yaml",
+        "markdown",
+        "json"
+    ],
+    "[json]": {
+        "editor.formatOnSave": false,
+        "editor.formatOnPaste": false
+    },
+    "[html]": {
+        "editor.formatOnSave": false,
+        "editor.formatOnPaste": false
+    }
+}

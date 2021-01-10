@@ -1,0 +1,46 @@
+---
+permalink: /failed/
+
+index: noindex
+
+error:
+  heading: Something just went wrong
+---
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    {% include structure/meta.html %}
+    {% include structure/styles.html %}
+</head>
+
+<body class="d-flex flex-column justify-content-between">
+    
+    <div class="top-wrapper">
+        
+        {% include structure/navbar.html %}
+        
+        <section class="py-6" data-aos="fade">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-7">
+                        <h2 class="display-3 mb-0 ml-3" style="transform: rotate(90deg);width: fit-content;">:[</h2>
+                        <h2 class="mb-4">{{ page.error.heading }}</h2>
+                        <p class="lead text-dark-light mb-4">
+                            <a class="text-secondary text-decoration-none" href="javascript:window.history.go(-1);">Go back</a> to the form to resolve the errors or try again later. Continue browsing on <a class="text-secondary text-decoration-none" href="{{ site.url | append: '/' | absolute_url }}">{{ site.author }}<i class="fas fa-long-arrow-alt-right ml-2"></i></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="footer-wrapper">
+        {% include structure/footer.html %}
+    </div>
+
+{% include structure/scripts.html %}
+
+</body>
+</html>

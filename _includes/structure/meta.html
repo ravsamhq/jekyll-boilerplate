@@ -1,0 +1,82 @@
+{% if jekyll.environment == 'production' %}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google.analytics_code }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '{{ site.google.analytics_code }}');
+    </script>
+{% endif %}
+
+<link rel="preload" href="{{ '/assets/fonts/HKGrotesk-Medium.woff2' | absolute_url }}" as="font" type="font/woff2" crossorigin />
+
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, shrink-to-fit=no" />
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="author" content="{{ site.author }}" />
+<meta name="robots" content="{{ page.index | default: 'all' }}" />
+<meta name="google-site-verification" content="{{ site.google.site_verification }}" />
+
+<meta itemprop="description" name="description" content="{{ page.meta.description | default: site.description }}" />
+
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content="{{ site.author }}" />
+<meta property="og:title" content="{{ page.meta.title | default: site.title }}" />
+<meta property="og:url" content="{{ page.url | absolute_url }}" />
+<meta property="og:description" content="{{ page.meta.description | default: site.description }}" />
+
+<meta property="twitter:title" content="{{ page.meta.title | default: site.title }}" />
+<meta property="twitter:description" content="{{ page.meta.description | default: site.description }}" />
+<meta name="twitter:site" content="#todo" />
+<meta name="twitter:creator" content="#todo" />
+<meta name="twitter:card" content="summary" />
+
+{% if page.type == 'article' %}
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="{{ '/' | append: page.image.path | absolute_url }}" />
+    <meta property="twitter:image" content="{{ '/' | append: page.image.path | absolute_url }}" />
+    <meta property="article:publisher" content="#todo" />
+    <meta property="article:author" content="#todo" />
+    <meta property="article:section" content="{{ page.categories | first }}" />
+    <meta property="article:published_time" content="{{ page.date }}" />
+    <meta property="article:modified_time" content="{{ page.last_modified_at | default: page.date }}" />
+{% elsif page.title == 'Contact' %}
+    <meta property="og:type" content="business.business">
+    <meta property="og:image" content="{{ '/assets/images/icons/favicons/apple-touch-icon.png?v=dLX2EOBeBG' | absolute_url }}" />
+    <meta property="business:contact_data:street_address" content="26 - IMA, Akash Avenue, Fatehgarh Churian Road">
+    <meta property="business:contact_data:locality" content="Amritsar">
+    <meta property="business:contact_data:region" content="Punjab">
+    <meta property="business:contact_data:postal_code" content="143001">
+    <meta property="business:contact_data:country_name" content="India">
+{% else %}
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="{{ '/assets/images/icons/favicons/apple-touch-icon.png?v=dLX2EOBeBG' | absolute_url }}" />
+    <meta name="twitter:image" content="{{ '/assets/images/icons/favicons/apple-touch-icon.png?v=dLX2EOBeBG' | absolute_url }}" />
+{% endif %}
+
+<title>{{ page.meta.title | default: site.title }}</title>
+
+<link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/images/icons/favicons/apple-touch-icon.png?v=dLX2EOBeBG' | absolute_url }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/icons/favicons/favicon-32x32.png?v=dLX2EOBeBG' | absolute_url }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/images/icons/favicons/favicon-16x16.png?v=dLX2EOBeBG' | absolute_url }}">
+<link rel="manifest" href="{{ '/assets/images/icons/favicons/site.webmanifest?v=dLX2EOBeBG' | absolute_url }}">
+<link rel="mask-icon" href="{{ '/assets/images/icons/favicons/safari-pinned-tab.svg?v=dLX2EOBeBG' | absolute_url }}" color="{{ site.colors.primary }}">
+<link rel="shortcut icon" href="{{ '/assets/images/icons/favicons/favicon.ico?v=dLX2EOBeBG' | absolute_url }}">
+
+<meta name="msapplication-TileColor" content="{{ site.colors.theme-white }}">
+<meta name="msapplication-config" content="{{ '/assets/images/icons/favicons/browserconfig.xml?v=dLX2EOBeBG' | absolute_url }}">
+<meta name="theme-color" content="{{ site.colors.theme-white }}" />
+<meta name="apple-mobile-web-app-status-bar-style" content="{{ site.colors.theme-white }}" />
+
+<link rel="home" href="{{ site.url | append: '/' | absolute_url }}" />
+<link rel="canonical" href="{{ page.url | absolute_url }}" />
+<link rel="alternate" type="application/atom+xml" title="{{ 'Feed for ' | append: site.author }}" href="{{ '/blog/feed.xml' | absolute_url }}" />
+<link rel="alternate" type="application/json" title="{{ 'Feed for ' | append: site.author }}" href="{{ '/blog/feed.json' | absolute_url }}" />
+<link type="text/plain" rel="author" href="{{ '/humans.txt' | absolute_url }}" />
+<link rel="alternate" href="{{ page.url | absolute_url }}" hreflang="en" />
+
+{% include schemas/org-schema.html %}
+{% include schemas/breadcrumb-schema.html %}

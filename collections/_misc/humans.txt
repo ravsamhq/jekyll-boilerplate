@@ -1,0 +1,37 @@
+---
+permalink: /humans.txt
+---
+
+{%- assign pages = '' | split: ',' -%}
+{%- assign index_pages = site.pages | where_exp: 'item', 'item.index == noindex' -%}
+{%- for page in index_pages -%}
+    {%- assign pages = pages | push: page -%}
+{%- endfor -%}
+{%- for page in site.blogs -%}
+    {%- assign pages = pages | push: page -%}
+{%- endfor -%}
+{%- for page in site.services -%}
+    {%- assign pages = pages | push: page -%}
+{%- endfor -%}
+{%- for page in site.legals -%}
+    {%- assign pages = pages | push: page -%}
+{%- endfor -%}
+{%- assign last_modified_page = pages | sort: 'last_modified_at' | first -%}
+
+/* TEAM */
+    Project Lead: Ravgeet Dhillon
+    Contact: ravgeetdhillon [at] gmail.com
+    Twitter: @ravgeetdhillon
+    From: Amritsar, Punjab, India
+
+    Company: RavSam Web Solutions
+    Contact: info [at] ravsam.in
+    Twitter: @ravsamhq
+    From: Amritsar, Punjab, India
+
+/* SITE */
+    Last update: {{ last_modified_page.last_modified_at | date: '%d/%m/%Y' }}
+    Language: English
+    Doctype: HTML5
+    IDE: VSCode
+    Technologies: Jekyll, Google Apps Script, Python
